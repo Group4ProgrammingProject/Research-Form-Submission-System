@@ -1,12 +1,11 @@
 """
 Views which allow users to create and activate accounts.
-
 """
+
 
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
-
 from registration import signals
 from registration.forms import RegistrationForm
 
@@ -17,7 +16,9 @@ class _RequestPassingFormView(FormView):
     methods, notably passing the HTTP request nearly everywhere, to
     enable finer-grained processing.
     
-    """
+ 
+
+ """
     def get(self, request, *args, **kwargs):
         # Pass request to get_form_class and get_form for per-request
         # form control.

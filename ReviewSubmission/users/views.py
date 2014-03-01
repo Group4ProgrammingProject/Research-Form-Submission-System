@@ -1,3 +1,4 @@
+from django.core.mail import EmailMessage
 import json, datetime
 from datetime import datetime
 
@@ -13,6 +14,7 @@ from django.conf import settings
 from django import template
 from django.template.loader import get_template 
 from django.core.urlresolvers import reverse
+from django.core.mail import EmailMultiAlternatives
 
 from models import Student
 
@@ -39,20 +41,16 @@ def create_user(request):
 
 			auth_login(request, user)
 
-			# student = Student(user=user)
-			# student.save()
-
-			# msg = EmailMultiAlternatives("<<Subject Line>>", "", "sender-email", [user.email])
-			# msg.attach_alternative(render_to_string("<<Link to HTML representation of email contents>>.html"), "text/html")
-			# msg.send()
-
 			context = RequestContext(request)
-			template = get_template('dashboard.html')
+			template = get_template('verification.html')
+			email = EmailMessage('Subject', 'Body', to=['su9nil14@gmail.com'])
+			email.attach_file('templates/email_registration_sent.html');
+			email.send()
 
 			return HttpResponse(template.render(context))
 
 	else:
-		print "Need to add some shit here to handle missing form fields"
+		print "Please register first"
 		return HttpResponseRedirect(reverse('dashboard'))
 
 def dashboard(request):
@@ -95,3 +93,5 @@ def logout(request):
 	auth.logout(request)
 	template = get_template('login.html')
 	return HttpResponse(template.render(context))
+
+	
