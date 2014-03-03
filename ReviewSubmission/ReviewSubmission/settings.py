@@ -24,10 +24,13 @@ DATABASES = {
 }
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com' 
-EMAIL_HOST_USER = ''#your gmail account
-EMAIL_HOST_PASSWORD = ''#your gmail password
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ethicsboard5@gmail.com'#your gmail account
+EMAIL_HOST_PASSWORD = 'ethicsboard'#your gmail password
 EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+SITE_NAME = "http://localhost:8000/"
 
 AUTH_PROFILE_MODULE = 'users.models'
 # Hosts/domain names that are valid for this site; required if DEBUG is False
