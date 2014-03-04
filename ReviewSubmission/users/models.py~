@@ -48,11 +48,4 @@ class SubmissionVersion(models.Model):
 #Chat models ssame as above. I'll swap it over in a while
 
 class Thread(models.Model):
-    submission = models.ForeignKey(Submission)
-
-class Message(models.Model):
-    thread = models.ForeignKey(Thread)
-    message = models.CharField(max_length=500)
-    user = models.ForeignKey(User)
-    written_at = models.DateTimeField(auto_add_now=True)
-
+    submission = models.ForeignKey(Submission) 

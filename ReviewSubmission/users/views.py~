@@ -91,14 +91,12 @@ def verify(request, key, email):
 	context = RequestContext(request)
 	user = Users.objects.get(username=email)
 	token = VerificationKey.Objects.get(key=key, user=user)
-	if token is not None and if token.is_used is False:
-        token.is_used = False
+	if token is not None:
 		user.is_active = True
 	user.save()
 
 	template = get_template('dashboard.html')
 	return HttpResponse(template.render(context))
-
 
 
 def logout(request):
