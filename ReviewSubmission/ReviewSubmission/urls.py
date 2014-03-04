@@ -15,7 +15,8 @@ urlpatterns = patterns('',
     url(r'^logout/', 'users.views.logout', name='logout'),
     url(r'^create_user/', 'users.views.create_user', name='create_user'),
     url(r'^create_key/', 'users.views.create_key', name='create_key'),
-
+    url(r'^invite/', 'users.views.invite', name='invite'),
+    url(r'^accept_invite/', 'users.views.accept_invite', name='accept_invite'),
 	url(r'^accounts/', include('email_registration.urls')),
 
 

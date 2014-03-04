@@ -14,7 +14,11 @@ class VerificationKey(models.Model):
     is_used = models.BooleanField(default=False)
 
 
-
+class InviteKey(models.Model):
+    key = models.CharField(unique=True, max_length=250)
+    user = models.OneToOneField(User, unique=True)
+    is_used = models.BooleanField(default=False)
+    
 #Submission models to be copied into a new app. Couldnt run Django properly on a different pc so i'll swap it over later
 
 

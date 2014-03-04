@@ -43,11 +43,11 @@ def create_user(request):
 
 			#auth_login(request, user)
 			verification_key = VerificationKey(key=(str(randint(111111111, 999999999)) + str(user.id)), user=user)
-			context = RequestContext(request)
+			verification_key.save()
+
 			template = get_template('verification.html')
 			body = "Hi there!\n\tTo complete your registration please continue to the link below.\n\n" + (settings.SITE_NAME) + "verify?key=" + key + "&email=" + user.username
 			email = EmailMessage('Subject', body, 'ethicsboard5@gmail.com', [user.username])
-			email.attach_file('templates/email_registration_sent.html');
 			email.send()
 
 			return HttpResponse(template.render(context))
@@ -64,8 +64,15 @@ def dashboard(request):
 		template = get_template('login.html')
 		return HttpResponse(template.render(context))
 
-	template = get_template('dashboard.html')
-	return HttpResponse(template.render(context))
+	if user.is_staff():
+		template = get_template('staff_dashboard.html')
+		return HttpResponse(template.render(context))
+
+	else:
+		template = get_template('dashboard.html')
+		return HttpResponse(template.render(context))
+
+	
 
 
 def login(request):
@@ -99,6 +106,52 @@ def verify(request, key, email):
 	template = get_template('dashboard.html')
 	return HttpResponse(template.render(context))
 
+def accept_invite(request, key, email):
+
+	context = RequestContext(request)
+	user = Users.objects.get(username=email)
+	token = InvitationKey.Objects.get(key=key, user=user)
+	if token is not None and if token.is_used is False:
+        token.is_used = False
+        user.is_staff = True
+	user.save()
+
+	context['staff_email'] = email
+
+	template = get_template('add_password.html')
+	return HttpResponse(template.render(context))
+
+@staff_member_required
+def invite(request):
+
+	context = RequestContext(request)
+	if 'email' in request.POST:
+		new_staff_member = User.objects.create_user(email=request.POST['email'])
+		new_staff_member.is_active = False
+		new_staff_member.save()
+
+		invite_key = InviteKey(key=(str(randint(111111111, 999999999)) + str(user.id)), user=new_staff_member)
+		invite_key.save()
+
+		body = "Hi there!\n\tYou've been added as an administrator for the ethics board application review system. To complete your registration, please follow the link below\n\n" + (settings.SITE_NAME) + "accept_invite?key=" + key + "&email=" + new_staff_member.username
+		email = EmailMessage('Subject', body, 'ethicsboard5@gmail.com', [user.username])
+		email.send()
+
+
+def change_password(request):
+
+	context = RequestContext(request)
+
+	if all((x in request.POST for x in ['email', 'password'])):
+		user = User.objects.get(username=request.POST['email'])
+		user.password = request.POST['password']
+		user.is_active = True
+		user.save()
+
+		auth_login(request, user)
+
+	template = get_template('dashboard.html')
+	return HttpResponse(template.render(context))
 
 
 def logout(request):
