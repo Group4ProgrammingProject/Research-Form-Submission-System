@@ -1,5 +1,5 @@
 from django.core.mail import EmailMessage
-import json, datetime
+import json, datetime, random
 from datetime import datetime
 
 from django.contrib.auth.models import User
@@ -16,6 +16,8 @@ from django.template.loader import get_template
 from django.core.urlresolvers import reverse
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
+
+from django.contrib.admin.views.decorators import staff_member_required
 
 from models import Student, VerificationKey
 
@@ -42,11 +44,11 @@ def create_user(request):
 			student.save()
 
 			#auth_login(request, user)
-			verification_key = VerificationKey(key=(str(randint(111111111, 999999999)) + str(user.id)), user=user)
+			verification_key = VerificationKey(key=(str(random.randint(111111111, 999999999)) + str(user.id)), user=user)
 			verification_key.save()
 
 			template = get_template('verification.html')
-			body = "Hi there!\n\tTo complete your registration please continue to the link below.\n\n" + (settings.SITE_NAME) + "verify?key=" + key + "&email=" + user.username
+			body = "Hi there!\n\tTo complete your registration please continue to the link below.\n\n" + (settings.SITE_NAME) + "verify?key=" + verification_key.key + "&email=" + user.username
 			email = EmailMessage('Subject', body, 'ethicsboard5@gmail.com', [user.username])
 			email.send()
 
@@ -98,8 +100,8 @@ def verify(request, key, email):
 	context = RequestContext(request)
 	user = Users.objects.get(username=email)
 	token = VerificationKey.Objects.get(key=key, user=user)
-	if token is not None and if token.is_used is False:
-        token.is_used = False
+	if token is not None and token.is_used is False:
+		token.is_used = False
 		user.is_active = True
 	user.save()
 
@@ -111,9 +113,9 @@ def accept_invite(request, key, email):
 	context = RequestContext(request)
 	user = Users.objects.get(username=email)
 	token = InvitationKey.Objects.get(key=key, user=user)
-	if token is not None and if token.is_used is False:
-        token.is_used = False
-        user.is_staff = True
+	if token is not None and token.is_used is False:
+		token.is_used = False
+		user.is_staff = True
 	user.save()
 
 	context['staff_email'] = email
@@ -130,10 +132,10 @@ def invite(request):
 		new_staff_member.is_active = False
 		new_staff_member.save()
 
-		invite_key = InviteKey(key=(str(randint(111111111, 999999999)) + str(user.id)), user=new_staff_member)
+		invite_key = InviteKey(key=(str(random.randint(111111111, 999999999)) + str(user.id)), user=new_staff_member)
 		invite_key.save()
 
-		body = "Hi there!\n\tYou've been added as an administrator for the ethics board application review system. To complete your registration, please follow the link below\n\n" + (settings.SITE_NAME) + "accept_invite?key=" + key + "&email=" + new_staff_member.username
+		body = "Hi there!\n\tYou've been added as an administrator for the ethics board application review system. To complete your registration, please follow the link below\n\n" + (settings.SITE_NAME) + "accept_invite?key=" + invite_key.key + "&email=" + new_staff_member.username
 		email = EmailMessage('Subject', body, 'ethicsboard5@gmail.com', [user.username])
 		email.send()
 

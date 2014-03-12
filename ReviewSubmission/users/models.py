@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import os
+from django.conf import settings
 #from django.contrib.auth.models import AbstractUser
 #from simple_email_confirmation import SimpleEmailConfirmationUserMixin
 
@@ -9,8 +11,8 @@ class Student(models.Model):
 User.profile = property(lambda u: Student.objects.get_or_create(user=u)[0])
 
 class VerificationKey(models.Model):
-	key = models.CharField(unique=True, max_length=250)
-	user = models.OneToOneField(User, unique=True)
+    key = models.CharField(unique=True, max_length=250)
+    user = models.OneToOneField(User, unique=True)
     is_used = models.BooleanField(default=False)
 
 
@@ -35,7 +37,7 @@ class Submission(models.Model):
         (INCOMPLETE, 'Incomplete'),
         (AWAITING_APPROVAL, 'Awaiting Approval'),
         (REJECTED, 'Rejected'),
-        (APPROVED. 'Approved'),
+        (APPROVED, 'Approved'),
     )
 
     user = models.OneToOneField(User, unique=True)
@@ -43,9 +45,9 @@ class Submission(models.Model):
     
 
 class SubmissionVersion(models.Model):
-    application_form = models.FileField(upload_to=os.path.join(PROJECT_DIR,''))
-    applicant_info = models.FileField(os.path.join(PROJECT_DIR, ''))
-    consent_form = models.FileField(os.path.join(PROJECT_DIR, ''))
+    application_form = models.FileField(upload_to=os.path.join(settings.PROJECT_DIR,''))
+    applicant_info = models.FileField(upload_to=os.path.join(settings.PROJECT_DIR, ''))
+    consent_form = models.FileField(upload_to=os.path.join(settings.PROJECT_DIR, ''))
     submission = models.ForeignKey(Submission)
 
 
@@ -58,5 +60,5 @@ class Message(models.Model):
     thread = models.ForeignKey(Thread)
     message = models.CharField(max_length=500)
     user = models.ForeignKey(User)
-    written_at = models.DateTimeField(auto_add_now=True)
+    written_at = models.DateTimeField(auto_now_add=True)
 
