@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('email_registration.urls')),
     url(r'^submit_personal/', 'submission.views.submit_personal', name='submit_personal'),
     url(r'^view_personal/', 'submission.views.view_personal_submissions', name='view_personal_template'),
-    url(r'^submission/', 'submission.views.submission', name='submission'),
+    url(r'^submission/', 'submission.views.submission', name='submissions'),
     url(r'^submissions/', 'submission.views.submissions', name='submissions'),
     # Examples:
     # url(r'^$', 'ReviewSubmission.views.home', name='home'),

@@ -1,0 +1,8 @@
+from django.conf.urls import patterns, include, url
+
+urlpatterns = patterns('',
+	url (r'^all/$', 'submission.view.submission'),
+	
+	url (r'^all/$', 'submission.views.submissions'),
+	url(r'^get//(?P<submission_id>\d+)/$','submission.views.submission'),
+)

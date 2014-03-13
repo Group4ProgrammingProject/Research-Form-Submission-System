@@ -62,7 +62,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/home/sean/Documents/Python/django-sean/Project/ReviewSubmission/static/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -123,7 +123,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	"C:/Users/su9nil14/Documents/GitHub/Research-Form-Submission-System/ReviewSubmission/templates"
+	'/home/sean/Documents/Python/django-sean/Project/ReviewSubmission/templates'
+	#"C:/Users/su9nil14/Documents/GitHub/Research-Form-Submission-System/ReviewSubmission/templates"
 )
 
 INSTALLED_APPS = (
@@ -134,7 +135,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'email_registration',
-	'users',
+	'users','submission',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
