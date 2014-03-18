@@ -1,29 +1,100 @@
-<html>
+<html>	
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Login</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/foundation.css' %}" />
+	<script src="{% static 'js/vendor/modernizr.js' %}"></script>
+</head>
 <body>
-	<h1>Login/Signup<h1>
-		<form id="login-form" action="{% url 'login' %}" method="POST">
-			{% csrf_token %}
-			<label for="login-email"></label>
-			<input type="email" id="login-email" placeholder="Email" name="email">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">Research Application Review System</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+      </ul>
 
-			<label for="login-password"></label>
-			<input type="password" id="login-password" placeholder="Password" name="password">
-			<input type="submit" value="Login">
-		</form>
-		<br/><br/><br/>
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+        </ul>
 
-		<form id="signup-form" action="{% url 'create_user' %}" method="POST">
-			{% csrf_token %}
-			<label for="signup-email"></label>
-			<input type="email" id="signup-email" placeholder="Email" name="email">
+        <!-- Left Nav Section -->
+        <ul class="left">
+        </ul>
+      </section>
+    </nav>
 
-			<label for="signup-password"></label>
-			<input type="password" id="signup-password" placeholder="Password" name="password">
+    <br/><br/>
 
-			<label for="signup-password2"></label>
-			<input type="password" id="signup-password2" placeholder="Password" name="password2">
+    <div class="row">
+		<div class="large-6 large-centered columns">
+			<div class="panel">
+				<form id="login-form" action="{% url 'login' %}" method="POST">
+					{% csrf_token %}
+					<div class="row">
+						<div class="large-12 columns">
+							<label for="login-email">Email</label>
+							<input type="email" id="login-email" name="email">
+						</div>
+					</div>
+					<div class="row">
+			       		<div class="large-12 columns">
+							<label for="login-password">Password</label>
+							<input type="password" id="login-password"name="password">
+						</div>
+			      	</div>
+			      	<div class="row">
+			       		<div class="large-12 columns">
+							<input type="submit" class="small radious button" value="Log In">
+						</div>
+			      	</div>
+			    </form>
+			</div>
+		</div>
+    </div>
 
-			<input type="submit" value="Login">
-		</form>
+	<br/><br/>
+
+	<div class="row">
+		<div class="large-6 large-centered columns">
+			<div class="panel">
+				<form id="signup-form" action="{% url 'create_user' %}" method="POST">
+					{% csrf_token %}
+					<div class="row">
+						<div class="large-12 columns">
+							<label for="signup-email">Email</label>
+							<input type="email" id="signup-email" name="email">
+						</div>
+					</div>
+					<div class="row">
+			       		<div class="large-12 columns">
+							<label for="signup-password">Password</label>
+							<input type="password" id="signup-password" name="password">
+						</div>
+			      	</div>
+			      	<div class="row">
+			       		<div class="large-12 columns">
+							<label for="signup-password2">Password</label>
+							<input type="password" id="signup-password2" name="password2">
+						</div>
+			      	</div>
+			      	<div class="row">
+			       		<div class="large-12 columns">
+							<input type="submit" class="small radious button" value="Sign Up">
+						</div>
+			      	</div>
+			    </form>
+			</div>
+		</div>
+    </div>
+    
+    <script src="{% static 'js/vendor/jquery.js' %}"></script>
+    <script src="{% static 'js/foundation.min.js' %}"></script>
+    <script>
+      $(document).foundation();
+    </script>
 </body>
 </html>
