@@ -1,5 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 from time import time
+
+import os
+from django.conf import settings
 
 def get_upload_file_name(isntance, filename):
 	return "uploaded_files/%s_%s" % (str(time()).replace('.','_'),filename)

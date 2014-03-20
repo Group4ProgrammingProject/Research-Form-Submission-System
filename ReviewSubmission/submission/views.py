@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template import Context
 from submission.models import Submission
-from forms import SubmissionForm
+from submission.forms import SubmissionForm
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 # Create your views here.
@@ -20,7 +20,7 @@ def view_personal_submissions (request):
 	name = "Personal Submissions View"
 	t = get_template('personal_submission_view.html')
 	html = t.render(Context({'name': name}))
-	return render_to_response('personal_submission_view.html',context_instance=RequestContext(request))  
+	return render_to_response('personal_submission_view.html',context_instance=RequestContext(request))
 #return HttpResponse(html)
 
 def submissions(request):
@@ -51,10 +51,3 @@ def upload(request):
 	args['form'] = form
 
 	return render_to_response('personal_submission_view.html',args)
-
-
-
-
-
-
-

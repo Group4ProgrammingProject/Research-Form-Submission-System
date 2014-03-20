@@ -1,6 +1,7 @@
 from django.db import models
 from submission.models import Submission
 from django.contrib.auth.models import User
+from django.conf import settings
 
 class Thread(models.Model):
     submission = models.ForeignKey(Submission)
