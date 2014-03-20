@@ -1,5 +1,5 @@
 from django.core.mail import EmailMessage
-import json, datetime, random
+import json, datetime, random, string, urllib
 from datetime import datetime
 
 from django.contrib.auth.models import User
@@ -51,7 +51,10 @@ def create_user(request):
 			verification_key.save()
 
 			template = get_template('verification.html')
-			body = "Hi there!\n\tTo complete your registration please continue to the link below.\n\n" + (settings.SITE_NAME) + "verify?key=" + verification_key.key + "&email=" + user.username
+
+			url_data = { 'email' : user.username,'key' : verification_key.key }
+
+			body = "Hi there!\n\tTo complete your registration please continue to the link below.\n\n" + (settings.SITE_NAME) + "verify/" + urllib.quote(user.username) + "/" + verification_key.key
 			email = EmailMessage('Subject', body, 'ethicsboard5@gmail.com', [user.username])
 			email.send()
 
@@ -92,21 +95,27 @@ def login(request):
 		password = request.POST['password']
 		user = auth_authenticate(username=email, password=password)
 		auth_login(request, user)
+
+		if user.is_active:
+			template = get_template('dashboard.html')
+		else:
+			template = get_template('awaiting_verification.html')
 		return HttpResponseRedirect(reverse('dashboard'))
 	else:
 		template = get_template('dashboard.html')
 		return HttpResponse(template.render(context))
 
 
-def verify(request, key, email):
+def verify(request, email, key):
 
 	context = RequestContext(request)
-	user = Users.objects.get(username=email)
-	token = VerificationKey.Objects.get(key=key, user=user)
+	user = User.objects.get(username=email)
+	token = VerificationKey.objects.get(key=key, user=user)
 	if token is not None and token.is_used is False:
 		token.is_used = False
 		user.is_active = True
 	user.save()
+	token.save()
 
 	template = get_template('dashboard.html')
 	return HttpResponse(template.render(context))
@@ -115,7 +124,7 @@ def accept_invite(request, key, email):
 
 	context = RequestContext(request)
 	user = Users.objects.get(username=email)
-	token = InvitationKey.Objects.get(key=key, user=user)
+	token = InvitationKey.objects.get(key=key, user=user)
 	if token is not None and token.is_used is False:
 		token.is_used = False
 		user.is_staff = True

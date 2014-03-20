@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url(r'^view_personal/', 'submission.views.view_personal_submissions', name='view_personal_template'),
     url(r'^submission/', 'submission.views.submission', name='submission'),
     url(r'^submissions/', 'submission.views.submissions', name='submissions'),
+    url(r'^verify/(?P<email>\S{0,50})/(?P<key>\w{0,50})', 'users.views.verify', name='verify'),
     # Examples:
     # url(r'^$', 'ReviewSubmission.views.home', name='home'),
     # url(r'^ReviewSubmission/', include('ReviewSubmission.foo.urls')),
