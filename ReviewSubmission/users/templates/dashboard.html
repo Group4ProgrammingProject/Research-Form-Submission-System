@@ -1,8 +1,86 @@
-<html>
-	<h1>This is a page for the student. Should show any pending submissions and their status. Also should have a form for uploading a new submission. Format tbc by Carl. I'll try sort that out soon.</h1>
-	<br/><br/><br/><br/>
-	<form action="{% url 'logout' %}" method="POST">
-		{% csrf_token %}
-		<input type="submit" value="Logout">
-	</form>
+<html>	
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Login</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/foundation.css' %}" />
+	<script src="{% static 'js/vendor/modernizr.js' %}"></script>
+</head>
+<body>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="?">Research Application Review System</a></h1>
+        </li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+			<li><a href="{% url 'logout' %}">Log Out</a><li>
+        </ul>
+        <!-- Left Nav Section -->
+        <ul class="left">
+        </ul>
+      </section>
+    </nav>
+
+    <br/><br/>
+
+    <div class="row">
+    	<div class="large-12 columns">
+    		<h4>Welcome, #placeholder.</h3>
+    	</div>
+	</div>
+
+    <hr/>
+
+    <div class="row">
+   		<div class="large-12 columns">
+			<input type="submit" class="small radious button" value="Upload Documment">
+		</div>
+  	</div>
+    <div class="row">
+    	<div class="large-12 large-centered columns">
+		    <table>
+		  		<thead>
+					<tr>
+					  <th width="400">Submmitted Documents</th>
+					  <th width="200">Date</th>
+					  <th width="200">Status</th>
+					  <th width="200">Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					</tr>
+					<tr>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					</tr>
+					<tr>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					  <td>Content Goes Here</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+    
+    <script src="{% static 'js/vendor/jquery.js' %}"></script>
+    <script src="{% static 'js/foundation.min.js' %}"></script>
+    <script>
+      $(document).foundation();
+    </script>
+</body>
 </html>

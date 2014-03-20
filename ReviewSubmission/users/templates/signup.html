@@ -18,7 +18,7 @@
       <section class="top-bar-section">
         <!-- Right Nav Section -->
         <ul class="right">
-        	 <li><a href="{% url 'create_user' %}">Sign Up</a></li>
+        	 <li><a href="{% url 'login' %}">Log In</a></li>
         </ul>
 
         <!-- Left Nav Section -->
@@ -29,26 +29,32 @@
 
     <br/><br/>
 
-    <div class="row">
+	<div class="row">
 		<div class="large-6 large-centered columns">
 			<div class="panel">
-				<form id="login-form" action="{% url 'login' %}" method="POST">
+				<form id="signup-form" action="{% url 'create_user' %}" method="POST">
 					{% csrf_token %}
 					<div class="row">
 						<div class="large-12 columns">
-							<label for="login-email">Email</label>
-							<input type="email" id="login-email" name="email">
+							<label for="signup-email">Email</label>
+							<input type="email" id="signup-email" name="email">
 						</div>
 					</div>
 					<div class="row">
 			       		<div class="large-12 columns">
-							<label for="login-password">Password</label>
-							<input type="password" id="login-password"name="password">
+							<label for="signup-password">Password</label>
+							<input type="password" id="signup-password" name="password">
 						</div>
 			      	</div>
 			      	<div class="row">
 			       		<div class="large-12 columns">
-							<input type="submit" class="small radious button" value="Log In">
+							<label for="signup-password2">Password</label>
+							<input type="password" id="signup-password2" name="password2">
+						</div>
+			      	</div>
+			      	<div class="row">
+			       		<div class="large-12 columns">
+							<input type="submit" class="small radious button" value="Sign Up">
 						</div>
 			      	</div>
 			    </form>

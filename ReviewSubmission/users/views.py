@@ -25,6 +25,9 @@ def create_user(request):
 
 	context = RequestContext(request)
 
+	template = get_template('signup.html')
+	return HttpResponse(template.render(context))
+
 	if all((x in request.POST for x in ['email', 'password'])):
 
 		if User.objects.filter(email=request.POST['email']).count() > 0:
