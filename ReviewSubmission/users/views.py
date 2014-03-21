@@ -72,16 +72,13 @@ def dashboard(request):
 		template = get_template('login.html')
 		return HttpResponse(template.render(context))
 
-	if user.is_staff():
+	if request.user.is_staff:
 		template = get_template('staff_dashboard.html')
 		return HttpResponse(template.render(context))
-
+	
 	else:
 		template = get_template('dashboard.html')
 		return HttpResponse(template.render(context))
-
-	
-
 
 def login(request):
 
@@ -102,7 +99,7 @@ def login(request):
 			template = get_template('awaiting_verification.html')
 		return HttpResponseRedirect(reverse('dashboard'))
 	else:
-		template = get_template('dashboard.html')
+		template = get_template('login.html')
 		return HttpResponse(template.render(context))
 
 
