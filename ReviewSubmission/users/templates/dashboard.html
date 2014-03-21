@@ -13,11 +13,31 @@
 
 <hr/>
 
+<div class="reveal-modal-bg" style="display: none"></div>
+<div id="myModal" class="reveal-modal small" data-reveal>
+	<!-- This from should link to the submission app -->
+	<form action="" method="POST">
+		<div class="row">
+			<div class="large-12 columns">
+				<!-- If anyone knows how to style the "choose file" button, go for it. -->
+				<input type="file" accept=".pdf">
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<input type="submit" class="small radious button" value="Upload">
+			</div>
+		</div>
+	</form>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
 <div class="row">
 		<div class="large-12 columns">
-		<a href="?" class="small radious button">Upload Document</a>
+		<a href="?" class="small radious button" data-reveal-id="myModal" data-reveal>Upload Document</a>
 	</div>
-	</div>
+</div>
+
 <div class="row">
 	<div class="large-12 large-centered columns">
 	    <table>
