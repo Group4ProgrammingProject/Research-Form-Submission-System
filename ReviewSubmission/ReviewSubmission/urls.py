@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     url(r'^submission/', 'submission.views.submission', name='submission'),
     url(r'^submissions/', 'submission.views.submissions', name='submissions'),
     url(r'^verify/(?P<email>\S{0,50})/(?P<key>\w{0,50})', 'users.views.verify', name='verify'),
+    url(r'^comments/', 'comments.views.comments', name='comments'),
+    url(r'^comment/', 'comments.views.comment', name='comment'),
     # Examples:
     # url(r'^$', 'ReviewSubmission.views.home', name='home'),
     # url(r'^ReviewSubmission/', include('ReviewSubmission.foo.urls')),
