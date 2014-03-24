@@ -26,19 +26,17 @@ def get_upload_file_name(isntance, filename):
 #	most_recent = models.BooleanField(default=True) # needs to update to false if a newer version is submitted
 
 
-
-#Submission models to be copied into a new app. Couldnt run Django properly on a different pc so i'll swap it over later
-
-
 class Submission(models.Model):
 
-	AWAITING_COMPLETION_CHECK = 0
-	INCOMPLETE = 1
-	AWAITING_APPROVAL = 2
-	REJECTED = 3
-	APPROVED = 4
+	AWAITING_UPLOAD = 0
+	AWAITING_COMPLETION_CHECK = 1
+	INCOMPLETE = 2
+	AWAITING_APPROVAL = 3
+	REJECTED = 4
+	APPROVED = 5
 
 	STATUS_CHOICE = (
+		(AWAITING_UPLOAD, 'Awaiting application'),
 		(AWAITING_COMPLETION_CHECK, 'Being checked for completion'),
 		(INCOMPLETE, 'Incomplete'),
 		(AWAITING_APPROVAL, 'Awaiting Approval'),
@@ -46,12 +44,12 @@ class Submission(models.Model):
 		(APPROVED, 'Approved'),
 	)
 
-	user = models.OneToOneField(User, unique=True)
+	user = models.OneToOneField(User)
 	status = models.IntegerField(default=AWAITING_COMPLETION_CHECK, choices=STATUS_CHOICE)
 
 
 class Version(models.Model):
-	application_form = models.FileField(upload_to=os.path.join(settings.PROJECT_DIR,''))
-	applicant_info = models.FileField(upload_to=os.path.join(settings.PROJECT_DIR, ''))
-	consent_form = models.FileField(upload_to=os.path.join(settings.PROJECT_DIR, ''))
+	application_form = models.FileField(upload_to='documents/%Y/%m/%d')
+	applicant_info = models.FileField(upload_to='documents/%Y/%m/%d')
+	consent_form = models.FileField(upload_to='documents/%Y/%m/%d')
 	submission = models.ForeignKey(Submission)

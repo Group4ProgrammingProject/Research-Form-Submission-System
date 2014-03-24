@@ -1,11 +1,5 @@
+<!DOCTYPE html>
 <html>
-	<h1>Fully Authenticated user</h1>
-	<br/><br/><br/><br/>
-	<form action="{% url 'logout' %}" method="POST">
-		{% csrf_token %}
-		<input type="submit" value="Logout">
-	</form>
-
     <head>
         <meta charset="utf-8">
         <title>Minimal Django File Upload Example</title>   
@@ -22,9 +16,13 @@
         <p>No documents.</p>
     {% endif %}
 
-    <form action="{% url 'list_files' user.id %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Upload">
-    </form>
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url 'list_files' user.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="app_form" />
+            <input type="file" name="app_info" />
+            <input type="file" name="con_form" />
+            <input type="submit" name="submit" value="Upload" />
+</form>
     </body>
 </html> 

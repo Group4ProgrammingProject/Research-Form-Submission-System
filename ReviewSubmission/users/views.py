@@ -69,7 +69,7 @@ def dashboard(request):
 		template = get_template('login.html')
 		return HttpResponse(template.render(context))
 
-	if user.is_staff():
+	if request.user.is_staff:
 		template = get_template('staff_dashboard.html')
 		return HttpResponse(template.render(context))
 
@@ -109,12 +109,14 @@ def verify(request, email, key):
 	user = User.objects.get(username=email)
 	token = VerificationKey.objects.get(key=key, user=user)
 	if token is not None and token.is_used is False:
-		token.is_used = False
+		token.is_used = True
 		user.is_active = True
+		# user = auth_authenticate(username=email, password=user.password)
+		# auth_login(request, user)
 	user.save()
 	token.save()
 
-	template = get_template('dashboard.html')
+	template = get_template('login.html')
 	return HttpResponse(template.render(context))
 
 def accept_invite(request, key, email):
