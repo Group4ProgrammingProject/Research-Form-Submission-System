@@ -25,6 +25,9 @@ def create_user(request):
 
 	context = RequestContext(request)
 
+	template = get_template('signup.html')
+	return HttpResponse(template.render(context))
+
 	if all((x in request.POST for x in ['email', 'password'])):
 
 		if User.objects.filter(email=request.POST['email']).count() > 0:
@@ -72,13 +75,10 @@ def dashboard(request):
 	if request.user.is_staff:
 		template = get_template('staff_dashboard.html')
 		return HttpResponse(template.render(context))
-
+	
 	else:
 		template = get_template('dashboard.html')
 		return HttpResponse(template.render(context))
-
-	
-
 
 def login(request):
 
@@ -99,7 +99,7 @@ def login(request):
 			template = get_template('awaiting_verification.html')
 		return HttpResponseRedirect(reverse('dashboard'))
 	else:
-		template = get_template('dashboard.html')
+		template = get_template('login.html')
 		return HttpResponse(template.render(context))
 
 
