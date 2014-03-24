@@ -25,11 +25,9 @@ def create_user(request):
 
 	context = RequestContext(request)
 
-	template = get_template('signup.html')
-	return HttpResponse(template.render(context))
 
 	if all((x in request.POST for x in ['email', 'password'])):
-
+		print "request all good"
 		if User.objects.filter(email=request.POST['email']).count() > 0:
 			print 'User Already Exists'
 			template = get_template('login.html')
@@ -62,7 +60,9 @@ def create_user(request):
 
 	else:
 		print "Please register first"
-		return HttpResponseRedirect(reverse('dashboard'))
+		template = get_template('signup.html')
+		return HttpResponse(template.render(context))
+		
 
 def dashboard(request):
 
@@ -71,6 +71,8 @@ def dashboard(request):
 	if not request.user.is_authenticated():
 		template = get_template('login.html')
 		return HttpResponse(template.render(context))
+
+	context["user"] = request.user
 
 	if request.user.is_staff:
 		template = get_template('staff_dashboard.html')
@@ -95,6 +97,7 @@ def login(request):
 
 		if user.is_active:
 			template = get_template('dashboard.html')
+			return HttpResponse(template.render(context))
 		else:
 			template = get_template('awaiting_verification.html')
 		return HttpResponseRedirect(reverse('dashboard'))

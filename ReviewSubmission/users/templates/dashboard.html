@@ -1,11 +1,13 @@
+{% extends "base.html" %}
+
 <!-- <<<<<<< HEAD
 <html>
-	<h1>Fully Authenticated user</h1>
-	<br/><br/><br/><br/>
-	<form action="{% url 'logout' %}" method="POST">
-		{% csrf_token %}
-		<input type="submit" value="Logout">
-	</form>
+    <h1>Fully Authenticated user</h1>
+    <br/><br/><br/><br/>
+    <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
 
     <head>
         <meta charset="utf-8">
@@ -30,7 +32,6 @@
     </body>
 </html> 
 ======= -->
-{% extends "base.html" %}
 
 {% block tb-right-section %}
 <li><a href="{% url 'logout' %}">Log Out</a><li>
@@ -48,7 +49,8 @@
 <div class="reveal-modal-bg" style="display: none"></div>
 <div id="myModal" class="reveal-modal small" data-reveal>
 	<!-- This from should link to the submission app -->
-	<form action="" method="POST">
+	<form action="{% url 'list_files' user.id %}" method="POST">
+        {% csrf_token %}
 		<div class="row">
 			<div class="large-12 columns">
 				<!-- If anyone knows how to style the "choose file" button, go for it. -->
@@ -66,8 +68,11 @@
 
 <div class="row">
 		<div class="large-12 columns">
-		<a href="?" class="small radious button" data-reveal-id="myModal" data-reveal>Upload Document</a>
-	</div>
+            <form action="{% url 'list_files' user.id %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Upload Files" class="small radious button" data-reveal-id="myModal" data-reveal>
+             </form>
+		</div>
 </div>
 
 <div class="row">
@@ -105,4 +110,3 @@
 	</div>
 </div>
 {% endblock content %}
->>>>>>> 252c690b240c1e533cbf47decf37594606895404
