@@ -23,13 +23,17 @@
 		<div class="large-6 large-centered columns">
 			<div class="panel">
 				<h1>Comments:</h1>
-					{% for Message in comments %}
-						<div>
-							<d1><b>User:	{{ Message.user }}</b></d1>
-							<br/><d1>	{{ Message.message }}</d1>
-							<br/><d1><sup><i>	{{ Message.written_at }}</i></sup><d1>
-						</div>
-					{% endfor %}
+					{% if comments %}
+						{% for Message in comments %}
+							<div>
+								<d1><b>User:	{{ Message.user }}</b></d1>
+								<br/><d1>	{{ Message.message }}</d1>
+								<br/><d1><sup><i>	{{ Message.written_at }}</i></sup><d1>
+							</div>
+						{% endfor %}
+					{% else %}
+						<d1>No comments.</d1>	
+					{% endif %}
 			      	</div>
 			    </form>
 			</div>
