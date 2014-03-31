@@ -37,10 +37,11 @@
 <li><a href="{% url 'logout' %}">Log Out</a><li>
 	{% endblock tb-right-section %}
 
-	{% block content %}
+{% block content %}
 <div class="row">
 	<div class="large-12 columns">
 		<h4>Welcome, {{ user.email }}.</h4>
+		<h5>Is this user active? {{ user.is_active }}.</h5>
 	</div>
 </div>
 
@@ -88,19 +89,19 @@
 			</thead>
 			<tbody>
 				<tr>
-				  <td>Content Goes Here</td>
-				  <td>Content Goes Here</td>
-				  <td>Content Goes Here</td>
-				  <td>Content Goes Here</td>
-				</tr>
-				<tr>
-				  <td>Content Goes Here</td>
+				  <td><a href="#" >Document 1</a></td>
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>
 				</tr>
 				<tr>
+				  <td><a href="#" >Document 2</a></td>
 				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				</tr>
+				<tr>
+				  <td><a href="#" >Document 3</a></td>
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>

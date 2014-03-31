@@ -1,3 +1,21 @@
 {% extends "base.html" %}
 
-<h1>An email has been sent to you to verify your account. This might be tricky to implement.</h1>
+{% block tb-right-section %}    	 
+<li><a href="{% url 'login' %}">Log In</a></li>
+{% endblock tb-right-section %}
+
+{% block content %}
+<div class="row">
+	<div class="large-12 columns">
+		<h4>An email has been sent to you to verify your account.</h4>
+	</div>
+</div>
+
+ <br/><br/>
+
+<div class="row">
+	<div class="large-12 columns">
+		<a href="{% url 'login' %}" class="small radious button">Return to Log In page</a>
+	</div>
+</div>
+{% endblock content %}
