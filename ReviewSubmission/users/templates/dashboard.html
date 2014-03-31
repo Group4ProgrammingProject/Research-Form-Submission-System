@@ -1,13 +1,47 @@
 {% extends "base.html" %}
 
+<!-- <<<<<<< HEAD
+<html>
+    <h1>Fully Authenticated user</h1>
+    <br/><br/><br/><br/>
+    <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Minimal Django File Upload Example</title>   
+    </head>
+    <body>
+    <!-- List of uploaded documents ->
+    {% if versions %}
+        <ul>
+        {% for version in versions %}
+            <li><a href="{{ version.application_form.url }}">{{ version.application_form.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents.</p>
+    {% endif %}
+
+    <form action="{% url 'list_files' user.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Upload">
+    </form>
+    </body>
+</html> 
+======= -->
+
 {% block tb-right-section %}
 <li><a href="{% url 'logout' %}">Log Out</a><li>
 	{% endblock tb-right-section %}
 
-	{% block content %}
+{% block content %}
 <div class="row">
 	<div class="large-12 columns">
 		<h4>Welcome, {{ user.email }}.</h4>
+		<h5>Is this user active? {{ user.is_active }}.</h5>
 	</div>
 </div>
 
@@ -16,7 +50,8 @@
 <div class="reveal-modal-bg" style="display: none"></div>
 <div id="myModal" class="reveal-modal small" data-reveal>
 	<!-- This from should link to the submission app -->
-	<form action="" method="POST">
+	<form action="{% url 'list_files' user.id %}" method="POST">
+        {% csrf_token %}
 		<div class="row">
 			<div class="large-12 columns">
 				<!-- If anyone knows how to style the "choose file" button, go for it. -->
@@ -34,8 +69,11 @@
 
 <div class="row">
 		<div class="large-12 columns">
-		<a href="?" class="small radious button" data-reveal-id="myModal" data-reveal>Upload Document</a>
-	</div>
+            <form action="{% url 'list_files' user.id %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Upload Files" class="small radious button" data-reveal-id="myModal" data-reveal>
+             </form>
+		</div>
 </div>
 
 <div class="row">
@@ -51,19 +89,19 @@
 			</thead>
 			<tbody>
 				<tr>
-				  <td>Content Goes Here</td>
-				  <td>Content Goes Here</td>
-				  <td>Content Goes Here</td>
-				  <td>Content Goes Here</td>
-				</tr>
-				<tr>
-				  <td>Content Goes Here</td>
+				  <td><a href="#" >Document 1</a></td>
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>
 				</tr>
 				<tr>
+				  <td><a href="#" >Document 2</a></td>
 				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				</tr>
+				<tr>
+				  <td><a href="#" >Document 3</a></td>
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>
