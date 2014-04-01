@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+
+{% block tb-right-section %}
+<li><a href="{% url 'logout' %}">Log Out</a><li>
+	{% endblock tb-right-section %}
+
+{% block content %}
+<div class="row">
+	<div class="large-12 columns">
+		<h4>Welcome, {{ user.email }}.</h4>
+		<h5>Is this user active? {{ user.is_active }}.</h5>
+	</div>
+</div>
+
+<hr/>
+
+<div class="reveal-modal-bg" style="display: none"></div>
+<div id="myModal" class="reveal-modal small" data-reveal>
+	<!-- This from should link to the submission app -->
+	<form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="app_form" />
+            <input type="file" name="app_info" />
+            <input type="file" name="con_form" />
+            <input type="submit" name="submit" value="Upload" />
+				</form>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div class="row">
+		<div class="large-12 columns">
+            <form action="{% url 'upload' %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Upload Files" class="small radious button" data-reveal-id="myModal" data-reveal>
+				
+             </form>
+		</div>
+</div>
+
+<div class="row">
+	<div class="large-12 large-centered columns">
+	    <table>
+	  		<thead>
+				<tr>
+				  <th width="400">Submmitted Documents</th>
+				  <th width="200">Date</th>
+				  <th width="200">Status</th>
+				  <th width="200">Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				  <td><a href="#" >Document 1</a></td>
+				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				</tr>
+				<tr>
+				  <td><a href="#" >Document 2</a></td>
+				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				</tr>
+				<tr>
+				  <td><a href="#" >Document 3</a></td>
+				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				  <td>Content Goes Here</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock content %}

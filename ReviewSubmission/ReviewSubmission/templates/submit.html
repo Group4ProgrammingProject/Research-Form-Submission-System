@@ -1,0 +1,14 @@
+<html>
+<body>
+
+<h1>Submit {{Submission.title}}</h1>
+<p>Submission Goes Here</p>
+<form action = "/submissions/upload" method = "post" enctype="multipart/form-data">{% csrf_token %}
+<ul>
+{{form.as_ul}}
+</ul> 
+<!--<input type = "submit" name = "submit" value = "Submit PDF">-->
+</form>
+
+</body>
+</html>
