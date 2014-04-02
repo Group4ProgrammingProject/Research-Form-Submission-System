@@ -88,11 +88,12 @@
 				</tr>
 			</thead>
 			<tbody>
+                {% for version in versions %}
 				<tr>
-				  <td><a href="#" >Document 1</a></td>
-				  <td>Content Goes Here</td>
-				  <td>Content Goes Here</td>
-				  <td>Content Goes Here</td>
+				  <td><a href="#">Applicant Form</a></td>
+				  <td>{{ version.pub_date }}</td>
+				  <td>{{ version.status }}</td>
+				  <td>{{ version.application_form.url }}</td>
 				</tr>
 				<tr>
 				  <td><a href="#" >Document 2</a></td>
@@ -106,6 +107,7 @@
 				  <td>Content Goes Here</td>
 				  <td>Content Goes Here</td>
 				</tr>
+                {% endfor %}
 			</tbody>
 		</table>
 	</div>

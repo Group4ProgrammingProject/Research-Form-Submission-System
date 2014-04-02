@@ -23,6 +23,11 @@ DATABASES = {
     }
 }
 
+#Authentication backends
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ethicsboard5@gmail.com'#your gmail account
