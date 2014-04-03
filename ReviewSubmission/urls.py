@@ -6,6 +6,7 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from ReviewSubmission import settings
+from django.views.generic import TemplateView
 # Uncomment the next two lines to enable the admin:
 
 urlpatterns = patterns('',
@@ -17,7 +18,6 @@ urlpatterns = patterns('',
     #url(r'^create_key/', 'users.views.create_key', name='create_key'),
     url(r'^invite/', 'users.views.invite', name='invite'),
     url(r'^accept_invite/', 'users.views.accept_invite', name='accept_invite'),
-    url(r'^accounts/', include('email_registration.urls')),
     url(r'^submit_personal/', 'submission.views.submit_personal', name='submit_personal'),
     url(r'^view_personal/', 'submission.views.view_personal_submissions', name='view_personal_template'),
     url(r'^submission/', 'submission.views.submission', name='submission'),
@@ -26,14 +26,14 @@ urlpatterns = patterns('',
     url(r'^list_files/(?P<subm_id>\w{0,50})', 'submission.views.list_files', name='list_files'),
     url(r'^comments/', 'comments.views.comments', name='comments'),
     url(r'^comment/', 'comments.views.comment', name='comment'),
-
+    url(r'^viewFunction/', 'submission.views.viewFunction', name='viewFunction'),
     # Examples:
     # url(r'^$', 'ReviewSubmission.views.home', name='home'),
     # url(r'^ReviewSubmission/', include('ReviewSubmission.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
-     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

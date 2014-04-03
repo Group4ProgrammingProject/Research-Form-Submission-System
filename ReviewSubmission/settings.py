@@ -133,6 +133,15 @@ TEMPLATE_DIRS = (
 	#"C:/Users/su9nil14/Documents/GitHub/Research-Form-Submission-System/ReviewSubmission/templates"
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,7 +149,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'email_registration',
 	'users','submission','comments',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
@@ -148,6 +156,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window;
+#UPLOAD_FILE_PATTERN = "media/documents/%s_%s"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
