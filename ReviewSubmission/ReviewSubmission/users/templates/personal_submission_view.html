@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block tb-right-section %}
+<li><a href="{% url 'logout' %}">Log Out</a><li>
+	{% endblock tb-right-section %}
+	
+{% block tb-left-section %}
+<li><a href="{% url 'dashboard' %}">Home</a><li>
+	{% endblock tb-left-section %}
+	
+{% block content %}
+<html>
+<body>
+
+<h1>Submissions</h1>
+
+<p>{{ submission.body }}</p>
+
+<div class="row">
+	<div class="large-12 large-centered columns">
+	    <table>
+	  		<thead>
+				<tr>
+				  <th width="400">Submmitted Documents</th>
+					<!-- {% if Version.thumbnail %} -->
+					<p><embed src="assets/uploaded_files/test.pdf" height= "500" width="500"/></p>
+					<!-- {% endif %}	 -->
+						  
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</body>
+</html>
+{% endblock content %}
