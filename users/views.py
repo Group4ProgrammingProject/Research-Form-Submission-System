@@ -21,6 +21,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from models import Student, VerificationKey
 from submission.models import Submission, Version
+from submission.forms import SubmissionForm
 
 def create_user(request):
 
@@ -76,16 +77,20 @@ def dashboard(request):
 
 	context["user"] = request.user
 
+	try:
+		submission = Submission.objects.get(pk=request.user.id)
+	except:
+		submission = Submission(user=request.user)
+		submission.save()
+
 	if request.user.is_staff:
 		template = get_template('staff_dashboard.html')
 		return HttpResponse(template.render(context))
 	
 	else:
-		try:
-			submission = Submission.objects.filter(user=request.user)
-		except:
-			submission = Submission(user=request.user)
-		context["versions"] = Version.objects.filter(submission=submission).order_by('-pub_date')
+		versions = Version.objects.filter(submission=submission)
+		context["versions"] = versions
+		context["submission"] = submission
 		template = get_template('dashboard.html')
 		return HttpResponse(template.render(context))
 
@@ -104,8 +109,7 @@ def login(request):
 		auth_login(request, user)
 
 		if user.is_active:
-			template = get_template('dashboard.html')
-			return HttpResponse(template.render(context))
+			return HttpResponseRedirect(reverse('dashboard'))
 		else:
 			template = get_template('awaiting_verification.html')
 		return HttpResponseRedirect(reverse('dashboard'))

@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 
 from submission.models import Submission, Version
 from submission.forms import SubmissionForm
+from users.views import dashboard
 
 def submit_personal (request):
 	name = "Personal Section:"
@@ -56,51 +57,30 @@ def upload(request):
 
 	return render_to_response('personal_submission_view.html',args)
 
-
-
-
-
-def list_files(request, subm_id):
+def list_files(request):
     # Handle file upload
 
     context = RequestContext(request)
-
     user = request.user
-
     context["user"] = user
 
     try:
-    	submission = Submission.objects.get(pk=user.id)
+        submission = Submission.objects.get(pk=user.id)
     except:
-    	submission = Submission(user=user)
+        submission = Submission(user=user)
         submission.save()
 
     if request.method == 'POST':
         # form = SubmissionForm(request.POST, request.FILES)
         if all((x in request.FILES for x in ['app_form', 'app_info', 'con_form'])):
-
             newdoc = Version(
-            	application_form=request.FILES['app_form'],
-            	applicant_info=request.FILES['app_info'],
-            	consent_form=request.FILES['con_form'],
-            	submission=submission)
+                application_form=request.FILES['app_form'],
+                applicant_info=request.FILES['app_info'],
+                consent_form=request.FILES['con_form'],
+                submission=submission)
             newdoc.save()
-
-            # Redirect to the document list after POST
-            template = get_template('dashboard.html')  
-            return HttpResponse(template.render(context))
-    else:
-        form = SubmissionForm() # A empty, unbound form
-        context["form"] = form
-
-    # Load documents for the list page
-    versions = Version.objects.filter(submission=submission)
-
-    context["versions"] = versions
-    context["submission"] = submission
-
-    template = get_template('file_list.html')
-    return HttpResponse(template.render(context))
+    
+    return redirect('dashboard')
 
     # # Render list page with the documents and the form
     # return render_to_response(
