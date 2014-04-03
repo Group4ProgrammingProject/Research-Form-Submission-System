@@ -53,4 +53,3 @@ class Version(models.Model):
 	applicant_info = models.FileField(upload_to='documents/%Y/%m/%d')
 	consent_form = models.FileField(upload_to='documents/%Y/%m/%d')
 	submission = models.ForeignKey(Submission)
-	pub_date = models.DateTimeField(auto_now_add=True)

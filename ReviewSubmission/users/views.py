@@ -20,7 +20,6 @@ from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 
 from models import Student, VerificationKey
-from submission.models import Submission, Version
 
 def create_user(request):
 
@@ -36,8 +35,7 @@ def create_user(request):
 
 		else:
 			#Username isn't important for this system so we'll just use the email. Less stuff for the user to fill out
-			user = User.objects.create_user(username=request.POST['email'], email=request.POST['email'])
-			user.set_password(request.POST['password'])
+			user = User.objects.create_user(request.POST['email'], request.POST['email'], request.POST['password'])
 			user.is_active = False
 			user.save()
 
@@ -81,11 +79,6 @@ def dashboard(request):
 		return HttpResponse(template.render(context))
 	
 	else:
-		try:
-			submission = Submission.objects.filter(user=request.user)
-		except:
-			submission = Submission(user=request.user)
-		context["versions"] = Version.objects.filter(submission=submission).order_by('-pub_date')
 		template = get_template('dashboard.html')
 		return HttpResponse(template.render(context))
 
@@ -99,7 +92,6 @@ def login(request):
 	elif all((x in request.POST for x in ['email', 'password'])):
 		email = request.POST['email']
 		password = request.POST['password']
-
 		user = auth_authenticate(username=email, password=password)
 		auth_login(request, user)
 
