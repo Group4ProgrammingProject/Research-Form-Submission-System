@@ -24,8 +24,8 @@ urlpatterns = patterns('',
     url(r'^submissions/', 'submission.views.submissions', name='submissions'),
     url(r'^verify/(?P<email>\S{0,50})/(?P<key>\w{0,50})', 'users.views.verify', name='verify'), 
     url(r'^list_files/(?P<subm_id>\w{0,50})', 'submission.views.list_files', name='list_files'),
-    # url(r'^comments/', 'comments.views.comments', name='comments'),
-    # url(r'^comment/', 'comments.views.comment', name='comment'),
+    #url(r'^comments/', 'comments.views.comments', name='comments'),
+    #url(r'^comment/', 'comments.views.comment', name='comment'),
 
     # Examples:
     # url(r'^$', 'ReviewSubmission.views.home', name='home'),

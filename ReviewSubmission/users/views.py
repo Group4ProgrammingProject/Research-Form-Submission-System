@@ -70,7 +70,7 @@ def dashboard(request):
 
 	context = RequestContext(request)
 
-	if not request.user.is_authenticated():
+	if request.user is None or not request.user.is_authenticated():
 		template = get_template('login.html')
 		return HttpResponse(template.render(context))
 
