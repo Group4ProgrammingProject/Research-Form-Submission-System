@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{%load static %}
+
+{% block tb-right-section %}
+<li><a href="{% url 'logout' %}">Log Out</a><li>
+	{% endblock tb-right-section %}
+	
+{% block tb-left-section %}
+<li><a href="{% url 'dashboard' %}">Home</a><li>
+	{% endblock tb-left-section %}
+	
+{% block content %}
+<html>
+<body>
+
+<h1>Submmitted Documents</h1>
+
+<p>{{ submission.body }}</p>
+
+<div class="row">
+	<div class="large-12 large-centered columns">
+	    <table>
+	  		<thead>
+				<tr>
+				
+			<p><embed src="{version.application_form.url}" height="500" width="500"/></p>			
+
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</body>
+</html>
+{% endblock content %}

@@ -15,6 +15,7 @@ from submission.models import Submission, Version
 from submission.forms import SubmissionForm
 from users.views import dashboard
 
+
 def submit_personal (request):
 	name = "Personal Section:"
 	t = get_template('submit_personal.html')
@@ -88,3 +89,8 @@ def list_files(request):
     #     {'documents': documents, 'form': form},
     #     context_instance=RequestContext(request)
     # )
+def viewFunction(request):
+
+
+	return render_to_response('view.html')
+	
