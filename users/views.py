@@ -88,6 +88,15 @@ def dashboard(request):
 		return HttpResponse(template.render(context))
 	
 	else:
+		if request.method == 'POST':
+			# form = SubmissionForm(request.POST, request.FILES)
+			if all((x in request.FILES for x in ['app_form', 'app_info', 'con_form'])):
+				newdoc = Version(
+					application_form=request.FILES['app_form'],
+					applicant_info=request.FILES['app_info'],
+					consent_form=request.FILES['con_form'],
+					submission=submission)
+				newdoc.save()
 		versions = Version.objects.filter(submission=submission)
 		context["versions"] = versions
 		context["submission"] = submission

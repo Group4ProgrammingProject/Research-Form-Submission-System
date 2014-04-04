@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^$', 'submission.views.list_files', name='list_files'),
     url(r'^comments/', 'comments.views.comments', name='comments'),
     url(r'^comment/', 'comments.views.comment', name='comment'),
-    url(r'^viewFunction/', 'submission.views.viewFunction', name='viewFunction'),
+    url(r'^viewFunction/(?P<pk>\d+)/', 'submission.views.viewFunction', name='viewFunction'),
     # Examples:
     # url(r'^$', 'ReviewSubmission.views.home', name='home'),
     # url(r'^ReviewSubmission/', include('ReviewSubmission.foo.urls')),
@@ -36,4 +36,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+
+urlpatterns += staticfiles_urlpatterns()

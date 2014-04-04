@@ -1,0 +1,11 @@
+*.pyc
+
+*.db
+
+.DS_Store
+
+*.py~
+
+*.txt~
+
+media/

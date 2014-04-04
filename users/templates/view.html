@@ -2,34 +2,22 @@
 {%load static %}
 
 {% block tb-right-section %}
-<li><a href="{% url 'logout' %}">Log Out</a><li>
-	{% endblock tb-right-section %}
-	
-{% block tb-left-section %}
-<li><a href="{% url 'dashboard' %}">Home</a><li>
-	{% endblock tb-left-section %}
+<li class="active"><a data-reveal-id="myModal" data-reveal>Upload Document</a></li>
+<li class="has-dropdown">
+	<a>{{ user.email }}</a>
+	<ul class="dropdown">
+	  <li><a href="{% url 'logout' %}">Log Out</a><li>
+	</ul>
+</li>
+{% endblock tb-right-section %}
 	
 {% block content %}
 <html>
 <body>
 
-<h1>Submmitted Documents</h1>
-
-<p>{{ submission.body }}</p>
-
 <div class="row">
 	<div class="large-12 large-centered columns">
-	    <table>
-	  		<thead>
-				<tr>
-				
-			<p><embed src="{version.application_form.url}" height="500" width="500"/></p>			
-
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+		<p><embed src="" height="842" width="595"/></p>
 	</div>
 </div>
 

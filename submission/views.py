@@ -89,8 +89,12 @@ def list_files(request):
     #     {'documents': documents, 'form': form},
     #     context_instance=RequestContext(request)
     # )
-def viewFunction(request):
+def viewFunction(request, pk):
 
+    context = RequestContext(request)
+    context["user"] = request.user
+    
+    v = Version.objects.filter(pk=pk)
 
-	return render_to_response('view.html')
+    return render_to_response('view.html')
 	
