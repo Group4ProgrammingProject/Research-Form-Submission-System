@@ -60,8 +60,7 @@
 					{% for version in versions %}
 						<tr>
 							<td>
-								<p><embed src="{{ version.application_form.url }}" height="842" width="595"/></p>
-								<a href="{%url 'viewFunction' version.pk %}">{{ version.application_form.url }}</a>
+								<a href="{%url 'viewFunction' version.pk %}">{{ version.application_form.name }}</a>
 							</td>
 						</tr>
 					{% endfor %}

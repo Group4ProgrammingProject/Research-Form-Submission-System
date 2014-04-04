@@ -95,16 +95,11 @@ def viewFunction(request, pk):
     user = request.user
     context["user"] = user
 
-    try:
-        submission = Submission.objects.get(pk=user.id)
-    except:
-        submission = Submission(user=user)
-        submission.save()
-    
     submission = Submission.objects.get(pk=request.user.id)
     version = Version.objects.filter(submission=submission).get(pk=pk)
     context["version"] = version
     context["submission"] = submission
 
-    return render_to_response('view.html')
+    template = get_template('view.html')
+    return HttpResponse(template.render(context))
 	
