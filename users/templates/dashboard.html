@@ -14,7 +14,6 @@
 
 <div class="reveal-modal-bg" style="display: none"></div>
 <div id="myModal" class="reveal-modal small" data-reveal>
-	<!-- This from should link to the submission app -->
     <form action="{% url 'dashboard' %}" method="post" enctype="multipart/form-data">
     	{% csrf_token %}
 	    {{ form.as_p }}

@@ -2,7 +2,6 @@
 {%load static %}
 
 {% block tb-right-section %}
-<li class="active"><a data-reveal-id="myModal" data-reveal>Upload Document</a></li>
 <li class="has-dropdown">
 	<a>{{ user.email }}</a>
 	<ul class="dropdown">
@@ -16,8 +15,23 @@
 <body>
 
 <div class="row">
-	<div class="large-12 large-centered columns">
-		<p><embed src="" height="842" width="595"/></p>
+	<div class="large-12 columns">
+		<dl class="tabs" data-tab>
+		  <dd class="active"><a href="#panel2-1">Application Form</a></dd>
+		  <dd><a href="#panel2-2">Application Info</a></dd>
+		  <dd><a href="#panel2-3">Consent Form</a></dd>
+		</dl>
+		<div class="tabs-content">
+		  <div class="content active" id="panel2-1">
+		    <p><embed src="{{ version.application_form.url }}" height="842" width="595"/></p>
+		  </div>
+		  <div class="content" id="panel2-2">
+		    <p><embed src="{{ version.application_info.url }}" height="842" width="595"/></p>
+		  </div>
+		  <div class="content" id="panel2-3">
+		    <p><embed src="{{ version.consent_form.url }}" height="842" width="595"/></p>
+		  </div>
+		</div>
 	</div>
 </div>
 

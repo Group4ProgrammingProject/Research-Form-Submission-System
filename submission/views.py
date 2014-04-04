@@ -92,9 +92,19 @@ def list_files(request):
 def viewFunction(request, pk):
 
     context = RequestContext(request)
-    context["user"] = request.user
+    user = request.user
+    context["user"] = user
+
+    try:
+        submission = Submission.objects.get(pk=user.id)
+    except:
+        submission = Submission(user=user)
+        submission.save()
     
-    v = Version.objects.filter(pk=pk)
+    submission = Submission.objects.get(pk=request.user.id)
+    version = Version.objects.filter(submission=submission).get(pk=pk)
+    context["version"] = version
+    context["submission"] = submission
 
     return render_to_response('view.html')
 	
